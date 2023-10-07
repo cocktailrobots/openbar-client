@@ -101,6 +101,20 @@ hr {
   text-align: center;
 }
 
+.menu-admin-link-div {
+  text-align: right;
+  padding: 50px;
+  font-size: x-large;
+}
+
+.menu-admin-link-div a {
+  color: white;
+}
+
+.menu-admin-link-div a:visited {
+  color: white;
+}
+
 .btn {
   border-width: 1px;
   border-radius: 0.1em;

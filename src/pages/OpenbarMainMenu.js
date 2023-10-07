@@ -3,6 +3,7 @@ import { OpenBarConfig } from '../App'
 import { apiGetMany, getFromApi, postJsonToApi } from '../utils/api'
 import ErrorDisplay from '../components/ErrorDisplay'
 import Modal from 'react-modal'
+import { Link } from 'react-router-dom'
 
 export default function OpenBarMainMenu() {
   const [errMsg, setErrMsg] = useState(null)
@@ -114,6 +115,7 @@ export default function OpenBarMainMenu() {
   }
 
   return (
+    <>
     <div className='menu-container-div'>
       <Modal style={{
               overlay: {
@@ -167,5 +169,9 @@ export default function OpenBarMainMenu() {
       })}
       </ul>
     </div>
+    <div className='menu-admin-link-div'>
+      <div ><Link to="/admin">•</Link></div>
+    </div>
+    </>
   )
 }
