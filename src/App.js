@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import './css/App.css';
+import OpenBarMainMenu from './pages/OpenbarMainMenu';
+import AdminMenu from './pages/AdminMenu';
+import CocktailsMenu from './pages/CocktailsMenu';
+import CocktailEdit from './pages/CocktailEdit';
+import CocktailNew from './pages/CocktailNew';
+import IngredientsMenu from './pages/IngredientsMenu';
+import IngredientEdit from './pages/IngredientEdit';
+import IngredientNew from './pages/IngredientNew';
+import MenusMenu from './pages/MenusMenu';
+import MenuEdit from './pages/MenuEdit';
+import MenuNew from './pages/MenuNew';
+import RecipesMenu from './pages/RecipesMenu';
+import RecipeEdit from './pages/RecipeEdit';
+import RecipeNew from './pages/RecipeNew';
+import FluidsMenu from './pages/FluidsMenu';
+import ReactModal from 'react-modal';
+
+function envVar(key, defaultValue) {
+  if (process.env.NODE_ENV === 'development') {
+    key = key + "_DEV"
+  } else if (process.env.NODE_ENV === 'production') {
+    key = key + "_PROD"
+  } 
+
+  const val = process.env[key] || defaultValue
+  console.log("envVar: " + key + " = " + val, process.env)
+
+  return val
+}
+
+export const OpenBarConfig = {
+  "openbar_api_host": envVar("REACT_APP_OPENBAR_API_HOST", "localhost:3099"),
+  "cocktails_api_host": envVar("REACT_APP_COCKTAILS_API_HOST", "localhost:8675")
+}
+
+ReactModal.setAppElement('#root');
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Routes>
+      <Route path="/" element={<OpenBarMainMenu />} />
+      <Route path="/admin" element={<AdminMenu/>} />
+      <Route path="/cocktails" element={<CocktailsMenu />} />
+      <Route path="/cocktails/new" element={<CocktailNew />} />
+      <Route path="/cocktails/:id" element={<CocktailEdit />} />
+      <Route path="/fluids" element={<FluidsMenu />} />
+      <Route path="/ingredients" element={<IngredientsMenu />} />
+      <Route path="/ingredients/new" element={<IngredientNew />} />
+      <Route path="/ingredients/:id" element={<IngredientEdit />} />
+      <Route path="/menus" element={<MenusMenu />} />
+      <Route path="/menus/new" element={<MenuNew />} />
+      <Route path="/menus/:id" element={<MenuEdit />} />
+      <Route path="/recipes" element={<RecipesMenu />} />
+      <Route path="/recipes/new" element={<RecipeNew />} />
+      <Route path="/recipes/:id" element={<RecipeEdit />} />
+    </Routes>
+    </>
+  )
 }
 
 export default App;

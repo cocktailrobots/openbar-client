@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: hsl(0, 0%, 10%);
+  color: hsl(60, 100%, 30%);
+  font-size: 1.1em;
+  font-weight: 500;
+  font-family: Georgia, serif;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: hsl(60, 100%, 30%);
+  margin: 0;
+  width: 90%;
+}
+
+.menu-container-div {
+  display: flex;
+  background-color: #082640;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid hsl(60, 100%, 30%);
+  margin: 10%;
+  border-radius: 16px;
+}
+
+.menu-modal {
+  display: flex;
+  background-color: #082640;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 800px;
+  border: 2px solid hsl(60, 100%, 30%);
+  border-radius: 16px;
+  margin: 20%;
+  padding: 20px;
+}
+
+.menu-ul {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-li {
+  list-style-type: none;
+  margin: 0;
+  padding: 1% 5%;
+  width: 100%;
+  text-align: center;
+}
+
+.menu-li:hover {
+  cursor: pointer;
+}
+
+.menu-modal-cocktailname {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.menu-modal-description {
+  margin: 0;
+  padding: 0;
+  max-width: 600px;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.menu-modal-directions {
+  margin: 0;
+  padding: 0;
+  max-width: 600px;
+  text-align: center;
+  padding-bottom: 2em;
+  padding-top: 2em;
+  font-size: 1.2em;
+}
+
+.menu-modal-ingredients {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  font-size: 0.8em;
+}
+
+.menu-modal-buttons-div {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.btn {
+  border-width: 1px;
+  border-radius: 0.1em;
+  color: white;
+  font-family: inherit;
+  font-size: 1em;
+  background-color: hsl(120, 40%, 50%);
+  border-color: hsl(120, 100%, 30%);
+  padding: 0.5em 2em;
+}
+
+.btn:hover, .btn:focus {
+  cursor: pointer;
+  background-color: hsl(200, 100%, 60%);
+}
+
+.btn:active {
+  background-color: hsl(200, 100%, 40%);
+}
+
+.btn:disabled {
+  cursor:not-allowed;
+  color:hsl(0, 0%, 30%);
+  background-color: hsl(200, 10%, 70%);
+}
+
+.btn.btn-add {
+  padding: 0.25em 0.5em;
+  font-weight: bold;
+}
+
+.btn.btn-add:hover, .btn.btn-add:focus {
+  background-color: hsl(200, 100%, 60%);
+}
+
+.btn.btn-add:active {
+  background-color: hsl(200, 100%, 40%);
+}
+
+.btn.btn-cancel {
+  background-color: hsl(0, 80%, 50%);
+  border-color: hsl(0,60%,50%);
+  margin-right: 10px;
+}
+
+.btn.btn-cancel:hover, .btn.btn-cancel:focus {
+  background-color: hsl(0, 100%, 60%);
+}
+
+.btn.btn-cancel:active {
+  background-color: hsl(0, 100%, 40%);
+}
+
+.btn-padded-right {
+  margin-right: 10px;
+}
