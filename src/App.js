@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import './css/App.css';
 import OpenBarMainMenu from './pages/OpenbarMainMenu';
 import AdminMenu from './pages/AdminMenu';
+import ButtonsMenu from './pages/ButtonsMenu';
 import CocktailsMenu from './pages/CocktailsMenu';
 import CocktailEdit from './pages/CocktailEdit';
 import CocktailNew from './pages/CocktailNew';
@@ -43,6 +44,7 @@ function App() {
     <Routes>
       <Route path="/" element={<OpenBarMainMenu />} />
       <Route path="/admin" element={<AdminMenu/>} />
+      <Route path="/buttons" element={<ButtonsMenu/>} />
       <Route path="/cocktails" element={<CocktailsMenu />} />
       <Route path="/cocktails/new" element={<CocktailNew />} />
       <Route path="/cocktails/:id" element={<CocktailEdit />} />

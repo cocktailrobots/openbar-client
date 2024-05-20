@@ -20,6 +20,9 @@ export default function AdminMenu() {
       <div>
         <Link to="/menus">Menus</Link>
       </div>
+      <div>
+        <Link to="/buttons">Virtual Buttons</Link>
+      </div>
     </div>
   )
 }

@@ -64,16 +64,17 @@ export async function patchJsonToApi(host, path, body) {
 }
 
 async function sendToApiWithBody(host, path, body, method) {
+  const jsonBody = JSON.stringify(body)
   const url = "http://" + pathJoin(host, path)
   const response = await fetch(url, {
     method: method,
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body),
+    body: jsonBody,
   })
   const data = await response.json()
-  console.log(data)
+  console.log(jsonBody, data)
 
   return data
 }
