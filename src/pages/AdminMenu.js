@@ -23,6 +23,9 @@ export default function AdminMenu() {
       <div>
         <Link to="/buttons">Virtual Buttons</Link>
       </div>
+      <div>
+        <Link to="/config">Configuration</Link>
+      </div>
     </div>
   )
 }

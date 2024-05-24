@@ -2,14 +2,17 @@ import React, {useEffect, useState} from 'react'
 import { OpenBarConfig } from '../App'
 import { apiGetMany, getFromApi, postJsonToApi } from '../utils/api'
 import ErrorDisplay from '../components/ErrorDisplay'
-import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
+import MakeDrinkModal from './MakeDrinkModal'
+import CustomDrinkModal from './CustomDrinkModal'
 
 export default function OpenBarMainMenu() {
   const [errMsg, setErrMsg] = useState(null)
   const [recipes, setRecipes] = useState(null)
+  const [fluids, setFluids] = useState(null)
   const [ingredients, setIngredients] = useState(null)
   const [selectedRecipe, setSelectedRecipe] = useState(null)
+  const [recipeToCustomize, setRecipeToCustomize] = useState(null)
   const [defaultVolMl, setDefaultVolMl] = useState(135)
   const [isMaking, setIsMaking] = useState(false)
 
@@ -39,8 +42,16 @@ export default function OpenBarMainMenu() {
       {name:"config", host:OpenBarConfig.openbar_api_host, path:"/config", params:null},
     ]
     apiGetMany(toGet).then(results => {
+      setFluids(results.fluids)
       getRecipes(results.config, results.fluids).then(recipes => {
         console.log("recipes:", recipes)
+        recipes.push({
+          id: -1,
+          display_name: "Custom",
+          description: "Create your own custom cocktail from the available ingredients.",
+          ingredients: [],
+          directions: ""
+        })
         setRecipes(recipes)
         setIngredients(results.ingredients)
         
@@ -63,22 +74,18 @@ export default function OpenBarMainMenu() {
     )
   }
 
-  function handleModalClose() {
-    setSelectedRecipe(null)
-  }
-
-  function makeDrink() {
-    console.log(selectedRecipe)
+  function makeDrink(ingredients, volumeMl) {
+    console.log("making drink", volumeMl)
 
     let totalWeight = 0
-    for (let i = 0; i < selectedRecipe.ingredients.length; i++) {
-      totalWeight += selectedRecipe.ingredients[i].amount
+    for (let i = 0; i < ingredients.length; i++) {
+      totalWeight += ingredients[i].amount
     }
     console.log("totalWeight:", totalWeight)
     
     const percentages = []
-    for (let i = 0; i < selectedRecipe.ingredients.length; i++) {
-      percentages.push(selectedRecipe.ingredients[i].amount/totalWeight)
+    for (let i = 0; i < ingredients.length; i++) {
+      percentages.push(ingredients[i].amount/totalWeight)
     }
 
     console.log("percentages:", percentages)
@@ -89,14 +96,14 @@ export default function OpenBarMainMenu() {
 
     for (let i = 0; i < percentages.length; i++) {
       makeRequest.fluid_volumes.push({
-        fluid: selectedRecipe.ingredients[i].name,
-        volume_ml: Math.floor(percentages[i] * defaultVolMl)
+        fluid: ingredients[i].name,
+        volume_ml: Math.floor(percentages[i] * volumeMl)
       })
     }
     
     console.log("make", makeRequest)
 
-    setIsMaking(true)
+    setIsMaking(false)
     postJsonToApi(OpenBarConfig.openbar_api_host, "/make", makeRequest).then(res => {
       console.log(res)
     }).catch(err => {
@@ -107,7 +114,16 @@ export default function OpenBarMainMenu() {
     })
   }
 
+  function customizeRecipe(recipe) {
+    setSelectedRecipe(null)
+    setRecipeToCustomize(recipe)
+  }
+
   function recipeIngredientStr(recipe) {
+    if (recipe === null) {
+      return ""
+    }
+
     return recipe.ingredients.map(ing => {
       const ingredient = ingredients.filter(i => i.name === ing.name)[0]
       return ingredient.display_name
@@ -117,44 +133,22 @@ export default function OpenBarMainMenu() {
   return (
     <>
     <div className='menu-container-div'>
-      <Modal style={{
-              overlay: {
-                backgroundColor: 'black',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '50px',
-              },
-              content: {
-                backgroundColor: '#082640',
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                marginRight: '-50%',
-                transform: 'translate(-50%, -50%)',
-              }
-            }} isOpen={selectedRecipe !== null} onRequestClose={handleModalClose}>
-        {
-          selectedRecipe &&
-          <div>
-            <h3 className='menu-modal-cocktailname'>{selectedRecipe.display_name}</h3>
-            <div className='menu-modal-ingredients'>{recipeIngredientStr(selectedRecipe)}</div>
-            <div className='menu-modal-directions'>{selectedRecipe.directions}</div>
-            <div className='menu-modal-buttons-div'>
-              <button className='btn btn-padded-right' onClick={makeDrink} disabled={isMaking}>Make Drink</button>
-              <button className='btn btn-cancel' onClick={handleModalClose} disabled={isMaking}>Close</button>
-            </div>
-          </div>
-        }
-      </Modal>
+      <MakeDrinkModal recipe={selectedRecipe} isMaking={isMaking} ingredientStr={recipeIngredientStr(selectedRecipe)} handleModalClose={() => setSelectedRecipe(null)} makeDrink={ingredients => makeDrink(ingredients, defaultVolMl)} customizeRecipe={customizeRecipe}/>
+      <CustomDrinkModal recipe={recipeToCustomize} fluids={fluids} volMl={defaultVolMl} handleModalClose={() => setRecipeToCustomize(null)} makeDrink={makeDrink} isMaking={isMaking} />
       <div><h1>Cocktails</h1></div>
       <hr/>
       <ul className="menu-ul">
       {recipes.map(recipe => {
         return (
-            <li className="menu-li" key={recipe.id} onClick={() => setSelectedRecipe(recipe)}>
+            <li className="menu-li" key={recipe.id} onClick={
+              () => {
+                if (recipe.id === -1) {
+                  setRecipeToCustomize(recipe)
+                } else {
+                  setSelectedRecipe(recipe)
+                }
+              }
+            }>
               <div>
                 <h3>{recipe.display_name}</h3>
               </div>

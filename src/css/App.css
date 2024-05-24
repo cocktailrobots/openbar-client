@@ -128,11 +128,11 @@ hr {
 
 .btn:hover, .btn:focus {
   cursor: pointer;
-  background-color: hsl(200, 100%, 60%);
+  background-color: hsl(120, 55%, 60%);
 }
 
 .btn:active {
-  background-color: hsl(200, 100%, 40%);
+  background-color: hsl(120, 55%, 40%);
 }
 
 .btn:disabled {
@@ -142,8 +142,8 @@ hr {
 }
 
 .btn.btn-add {
-  padding: 0.25em 0.5em;
-  font-weight: bold;
+  background-color: hsl(200, 60%, 60%);
+  border-color: hsl(200, 40%, 60%);
 }
 
 .btn.btn-add:hover, .btn.btn-add:focus {
