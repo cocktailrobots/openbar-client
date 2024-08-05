@@ -171,3 +171,56 @@ hr {
 .btn-padded-right {
   margin-right: 10px;
 }
+
+.inpt {
+  border-radius: 4px;
+  font-size: 1.1em;
+}
+
+.admin-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #082640;
+  border: 2px solid hsl(60, 100%, 30%);
+  border-radius: 16px;
+  margin: 10%;
+  padding: 20px;
+}
+
+.admin-div a {
+  color: hsl(200, 100%, 60%);
+}
+
+.admin-checkbox {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}
+
+.admin-checkbox-span {
+  font-size: 1.25em;
+}
+
+.admin-menu-header-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}

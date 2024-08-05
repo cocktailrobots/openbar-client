@@ -12,7 +12,7 @@ export default function ButtonsMenu() {
   const [errMsg, setErrMsg] = useState(null)
   const [checked, setChecked] = useState([])
   const [intervalId, setIntervalId] = useState(null)
-  const [duration, setDuration] = useState(250)
+  const [duration, setDuration] = useState(1000)
   const [reverse, setReverse] = useState(false)
 
   useEffect(() => {
@@ -103,31 +103,37 @@ export default function ButtonsMenu() {
   return (
     <div onMouseUp={stopPumps}>
       <div><Link to="/admin">&lt; Admin</Link></div>
-      <div>
-        <h1>Fluids</h1>
+      <div className='admin-div'>
+        <div className='admin-menu-header-div'>
+          <h1>Fluids</h1>
+          <hr/>
+        </div>
+        {fluids.map((fluid, i) => {
+          return (
+              <div key={i}>
+                <span className='admin-checkbox-span'><input className="admin-checkbox" type='checkbox' defaultChecked={checked[i]} onChange={e => checkChanged(e,i)} /></span>
+                <label>Fluid {i} - </label>
+                <label>{fluid.name}</label>
+              </div>
+            )
+        })}
+        <br/>
+        <div>
+          <input className='inpt' type="number" value={duration} onChange={e => setDuration(parseInt(e.target.value))} />
+          <button onMouseDown={runPumpsForTime} className='btn'>Run Pumps For Time (ms)</button>
+        </div>
+        { /*
+        <div>
+          <button onMouseDown={runPumps} >Run Pumps</button>
+        </div>
+        
+         <div>
+          <input className="admin-checkbox" type="checkbox" defaultChecked={reverse} onChange={e => setReverse(e.target.checked)} />
+          <label>Reverse</label>
+        </div>
+        <ErrorDisplay err={errMsg}/> */
+        }
       </div>
-      {fluids.map((fluid, i) => {
-        return (
-            <div key={i}>
-              <input type='checkbox' defaultChecked={checked[i]} onChange={e => checkChanged(e,i)} />
-              <label>Fluid {i} - </label>
-              <label>{fluid.name}</label>
-            </div>
-          )
-      })}
-      <div>
-        <button onMouseDown={runPumps} >Run Pumps</button>
-      </div>
-
-      <div>
-        <button onMouseDown={runPumpsForTime} >Run Pumps For Time (ms)</button>
-        <input type="number" value={duration} onChange={e => setDuration(parseInt(e.target.value))} />
-      </div>
-      <div>
-        <input type="checkbox" defaultChecked={reverse} onChange={e => setReverse(e.target.checked)} />
-        <label>Reverse</label>
-      </div>
-      <ErrorDisplay err={errMsg}/>
     </div>
   )
 }

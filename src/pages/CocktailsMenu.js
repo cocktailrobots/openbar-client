@@ -10,22 +10,27 @@ export default function CocktailsMenu() {
   return (
     <div>
       <div><Link to="/admin">&lt; Admin</Link></div>
-      <div>
-        <h1>Cocktails</h1>
-      </div>
-      <div>
-        <ul>
-          {cocktails.map(cocktail => {
-            return (
-              <li key={cocktail.name}>
-                <div>{cocktail.display_name}</div>
-                <div>{cocktail.description}</div>
-                <div><Link to={"/cocktails/" + cocktail.name}>edit</Link></div>
-              </li>
+      <div className='admin-div'>
+        <div className='admin-menu-header-div'>
+          <h1>Cocktails</h1>
+          <hr/>
+        </div>
+        <div>
+          <ul>
+            {cocktails.map(cocktail => {
+              return (
+                <li key={cocktail.name}>
+                  <div>{cocktail.display_name}</div>
+                  <div>{cocktail.description}</div>
+                  <div><Link to={"/cocktails/" + cocktail.name}>edit</Link></div>
+                </li>
+              )}
             )}
-          )}
-        </ul>
-        <button onClick={evt => navigate('/cocktails/new')}>New</button>
+          </ul>
+          <div className='align-center'>
+            <button className='btn' onClick={evt => navigate('/cocktails/new')}>New</button>
+          </div>
+        </div>
       </div>
     </div>
   )

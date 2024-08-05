@@ -29,14 +29,22 @@ export default function ConfigMenu() {
       <div>
         <div><Link to="/admin">&lt; Admin</Link></div>
       </div>
-      <div>
-        <label>Default Drink Volume</label> <input type="number" value={volume} onChange={evt => setVolume(evt.target.value)}/>
-      </div>
-      <div>
-        <label>Num Pumps</label> <input type="number" value={numPumps} onChange={evt => setNumPumps(evt.target.value)}/>
-      </div>
-      <div>
-        <button onClick={saveConfig}>Save</button>
+        <div className='admin-div'>
+        <div className='admin-menu-header-div'>
+          <h1>Config</h1>
+          <hr/>
+          <br/>
+        </div>
+        <div>
+          <label>Default Drink Volume</label> <input type="number" value={volume} onChange={evt => setVolume(evt.target.value)}/>
+        </div>
+        <div>
+          <label>Num Pumps</label> <input type="number" value={numPumps} onChange={evt => setNumPumps(evt.target.value)}/>
+        </div>
+        <br/>
+        <div>
+          <button onClick={saveConfig} className='btn full-width'>Save</button>
+        </div>
       </div>
     </div>
   )

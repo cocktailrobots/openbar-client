@@ -10,23 +10,28 @@ export default function RecipesMenu() {
   return (
     <div>
       <div><Link to="/admin">&lt; Admin</Link></div>
-      <div>
-        <h1>Recipes</h1>
-      </div>
-      <div>
-        <ul>
-          {recipes.map(recipe => {
-            return (
-              <li key={recipe.id}>
-                <div>{recipe.display_name}</div>
-                <div>{recipe.description}</div>
-                <div>{recipe.directions}</div>
-                <div><Link to={"/recipes/" + recipe.id}>edit</Link></div>
-              </li>
+      <div className='admin-div'>
+        <div className='admin-menu-header-div'>
+          <h1>Recipes</h1>
+          <hr/>
+        </div>
+        <div>
+          <ul>
+            {recipes.map(recipe => {
+              return (
+                <li key={recipe.id}>
+                  <div>{recipe.display_name}</div>
+                  <div>{recipe.description}</div>
+                  <div>{recipe.directions}</div>
+                  <div><Link to={"/recipes/" + recipe.id}>edit</Link></div>
+                </li>
+              )}
             )}
-          )}
-        </ul>
-        <button onClick={evt => navigate('/recipes/new')}>New</button>
+          </ul>
+          <div className='align-center'>
+            <button className='btn'  onClick={evt => navigate('/recipes/new')}>New</button>
+          </div>
+        </div>
       </div>
     </div>
   )

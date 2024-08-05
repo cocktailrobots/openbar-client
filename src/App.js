@@ -18,6 +18,7 @@ import RecipeNew from './pages/RecipeNew';
 import FluidsMenu from './pages/FluidsMenu';
 import ReactModal from 'react-modal';
 import ConfigMenu from './pages/ConfigMenu';
+import InfoMenu from './pages/InfoMenu';
 
 function envVar(key, defaultValue) {
   if (process.env.NODE_ENV === 'development') {
@@ -60,6 +61,7 @@ function App() {
       <Route path="/recipes/new" element={<RecipeNew />} />
       <Route path="/recipes/:id" element={<RecipeEdit />} />
       <Route path='/config' element={<ConfigMenu />} />
+      <Route path='/info' element={<InfoMenu />} />
     </Routes>
     </>
   )

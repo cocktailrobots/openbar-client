@@ -93,37 +93,44 @@ export default function FluidsMenu() {
   return (
     <div>
       <div><Link to="/admin">&lt; Admin</Link></div>
-      <div>
-        <h1>Fluids</h1>
-      </div>
-      {fluids.map((fluid, i) => {
-        return (
-            <div key={i}>
-              <label>Fluid {i}</label>
-              <select value={fluid.id} onChange={evt => handleFluidChanged(i, evt)}>
-                <option value="empty"></option>
-                {ingredients.map(ingredient => {
-                  return (
-                    <option key={ingredient.name} value={ingredient.name}>{ingredient.display_name}</option>
-                  )
-                })}
-              </select>
-            </div>
-          )
-      })}
-      <div>
-        {menus.map(menu => {
+      <div className='admin-div'>
+        <div className='admin-menu-header-div'>
+          <h1>Fluids</h1>
+          <hr/>
+        </div>
+        <table><tbody>
+        {fluids.map((fluid, i) => {
           return (
-            <div key={menu}>
-              <div><input type="radio" name="current_menu" value={menu} checked={radioChecked(menu)} onChange={handleMenuChanged}/>{menu}</div>
-            </div>
-          )
+              <tr key={i}>
+                <td>Fluid {i}</td>
+                <td>
+                  <select value={fluid.id} onChange={evt => handleFluidChanged(i, evt)}>
+                    <option value="empty"></option>
+                    {ingredients.map(ingredient => {
+                      return (
+                        <option key={ingredient.name} value={ingredient.name}>{ingredient.display_name}</option>
+                      )
+                    })}
+                  </select>
+                </td>
+              </tr>
+            )
         })}
+        </tbody></table>
+        <div>
+          {menus.map(menu => {
+            return (
+              <div key={menu}>
+                <div><input type="radio" name="current_menu" value={menu} checked={radioChecked(menu)} onChange={handleMenuChanged}/>{menu}</div>
+              </div>
+            )
+          })}
+        </div>
+        <div>
+          <button className="btn" onClick={handleSubmit}>Submit</button>
+        </div>
+        <ErrorDisplay err={errMsg}/>
       </div>
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
-      </div>
-      <ErrorDisplay err={errMsg}/>
     </div>
   )
 }

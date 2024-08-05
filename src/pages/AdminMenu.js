@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function AdminMenu() {
   return (
-    <div>
+    <div className='admin-div'>
       <div><Link to="/">&lt; Main Menu</Link></div>
       <div>
         <Link to="/ingredients">Ingredients</Link>
@@ -25,6 +25,9 @@ export default function AdminMenu() {
       </div>
       <div>
         <Link to="/config">Configuration</Link>
+      </div>
+      <div>
+        <Link to="/info">Debug Info</Link>
       </div>
     </div>
   )
