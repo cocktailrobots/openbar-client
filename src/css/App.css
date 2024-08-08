@@ -224,3 +224,12 @@ hr {
 .full-width {
   width: 100%;
 }
+
+.jslink {
+  color: hsl(200, 100%, 60%);
+  text-decoration: underline;
+}
+
+.jslink:hover {
+  cursor: pointer;
+}
